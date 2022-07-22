@@ -30,7 +30,7 @@ export default function InfoPenawaran() {
     const [tawar, setTawar] = useState("");
     const [nomor, setNomor] = useState("");
     const [id_penawaran, setId_penawaran] = useState("");
-    const [coba, setCoba] = useState("");
+    const [coba, setCoba] = useState([]);
     const [penawaranmu, setPenawaranmu] = useState(false)
     const [status, setStatus] = useState("");
     const [id_produkTerjual, setId_produkTerjual] = useState("");
