@@ -1,0 +1,10 @@
+
+#jual{
+    background-color:  #7126B5;
+    position:absolute;
+    padding: 10px 10px;
+    gap: 16px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    border-color: #7126B5;
+}

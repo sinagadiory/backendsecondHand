@@ -1,0 +1,17 @@
+.fotoProduk {
+    width: 126px;
+    height: 126px;
+    border-style: dashed;
+    position: relative;
+    border-radius: 12px;
+    border-color: darkgray;
+  }
+  
+  .plus-icon {
+    width: 20px;
+    height: 20px;
+    color: darkgray;
+    display: flex;
+    margin: auto;
+    margin-top: 30px;
+  }

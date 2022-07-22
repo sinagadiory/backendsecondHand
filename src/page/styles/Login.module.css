@@ -1,0 +1,16 @@
+/* .tulisan{
+    font-size: 400px;
+} */
+
+/* @media only screen and ( max-width: 100px) {
+    #gambar img{
+        max-height:80%;
+    }
+} */
+
+@media only screen and (max-width: 600px) {
+    #gambar img{
+        max-width: 0%;
+        max-height: 0%;
+    }
+}
