@@ -22,11 +22,11 @@ export default function Home() {
 
     const fetchdata = async () => {
         try {
-            let response = await axios.get("http://localhost:8000/token", {
+            let response = await axios.get("https://backendsecondhand.herokuapp.com/token", {
                 withCredentials: true
             })
             const decoded = jwt_decode(response.data.accessToken)
-            response = await fetch(`http://localhost:8000/user/${decoded.id}`)
+            response = await fetch(`https://backendsecondhand.herokuapp.com/user/${decoded.id}`)
             const data = await response.json()
             SetUser(data)
         } catch (error) {
@@ -46,7 +46,7 @@ export default function Home() {
     const toggleShowA = () => setShowA(!showA);
     const Logout = async (e) => {
         e.preventDefault()
-        await axios.delete("http://localhost:8000/logout", {
+        await axios.delete("https://backendsecondhand.herokuapp.com/logout", {
             withCredentials: true
         })
         navigasi("/")

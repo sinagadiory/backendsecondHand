@@ -34,13 +34,13 @@ export default function InfoProfil() {
 
     const fetchdata = async () => {
         try {
-            let response = await axios.get("http://localhost:8000/token", {
+            let response = await axios.get("https://backendsecondhand.herokuapp.com/token", {
                 withCredentials: true
             })
             // console.log('ini lagi', response.data.accessToken)
             const decoded = jwt_decode(response.data.accessToken)
             // console.log('ini coy', decoded);
-            response = await fetch(`http://localhost:8000/user/${decoded.id}`)
+            response = await fetch(`https://backendsecondhand.herokuapp.com/user/${decoded.id}`)
             const data = await response.json()
             // console.log('data', data)
             SetUser(data)
@@ -95,7 +95,7 @@ export default function InfoProfil() {
         try {
             if (file != null) {
                 const response = await axios.put(
-                    "http://localhost:8000/api/v1/profiles/:id/image/cloudinary",
+                    "https://backendsecondhand.herokuapp.com/api/v1/profiles/:id/image/cloudinary",
                     form,
                     {
                         headers: {
@@ -106,7 +106,7 @@ export default function InfoProfil() {
 
                 SetImage(response.data.url)
                 console.log(SetImage('inilah', response.data.url))
-                await axios.put(`http://localhost:8000/update/${user.id}`, {
+                await axios.put(`https://backendsecondhand.herokuapp.com/update/${user.id}`, {
                     nama: nama,
                     kota: kota,
                     alamat: alamat,
@@ -119,7 +119,7 @@ export default function InfoProfil() {
                 await sleep(2 * 1000)
                 navigasi('/home')
             } else {
-                await axios.put(`http://localhost:8000/update/${user.id}`, {
+                await axios.put(`https://backendsecondhand.herokuapp.com/update/${user.id}`, {
                     nama: nama,
                     kota: kota,
                     alamat: alamat,

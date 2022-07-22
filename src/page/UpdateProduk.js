@@ -49,17 +49,17 @@ export default function UpdateProduk() {
 
     const fetchdata = async () => {
         try {
-            let response = await axios.get("http://localhost:8000/token", {
+            let response = await axios.get("https://backendsecondhand.herokuapp.com/token", {
                 withCredentials: true
             })
             SetToken(response.data.accessToken)
             const decoded = jwt_decode(response.data.accessToken)
-            response = await fetch(`http://localhost:8000/user/${decoded.id}`)
+            response = await fetch(`https://backendsecondhand.herokuapp.com/user/${decoded.id}`)
             const data = await response.json()
             SetUser(data)
-            response = await axios.get("http://localhost:8000/v1/Produk/add/form")
+            response = await axios.get("https://backendsecondhand.herokuapp.com/v1/Produk/add/form")
             setKategori(response.data)
-            response = await axios.get(`http://localhost:8000/v1/Produk/preview/${id}`)
+            response = await axios.get(`https://backendsecondhand.herokuapp.com/v1/Produk/preview/${id}`)
             setProducts(response.data)
             setProduk(response.data)
             if (data.id != response.data.id_penjual) {
@@ -134,7 +134,7 @@ export default function UpdateProduk() {
             }
 
             if (file != null) {
-                let response = await axios.post("http://localhost:8000/v1/Produk/add/image/cloudinary",
+                let response = await axios.post("https://backendsecondhand.herokuapp.com/v1/Produk/add/image/cloudinary",
                     form,
                     {
                         headers: {
@@ -144,7 +144,7 @@ export default function UpdateProduk() {
 
                 );
                 SetFoto(response.data.url)
-                response = await axios.put(`http://localhost:8000/v1/Produk/update/${id}`, {
+                response = await axios.put(`https://backendsecondhand.herokuapp.com/v1/Produk/update/${id}`, {
                     id_penjual: id_penjual,
                     id_kategori: id_kategori,
                     nama_produk: nama_produk,
@@ -153,13 +153,13 @@ export default function UpdateProduk() {
                     deskripsi: deskripsi,
                     foto: response.data.url
                 })
-                // response = await axios.post("http://localhost:8000/v1/Produk/email")
+                // response = await axios.post("https://backendsecondhand.herokuapp.com/v1/Produk/email")
                 // navigasi("/home");
                 berhasil()
                 await sleep(3 * 1000)
                 navigasi(`/preview/produk/${id}`)
             } else {
-                await axios.put(`http://localhost:8000/v1/Produk/update/${id}`, {
+                await axios.put(`https://backendsecondhand.herokuapp.com/v1/Produk/update/${id}`, {
                     id_penjual: id_penjual,
                     id_kategori: id_kategori,
                     nama_produk: nama_produk,

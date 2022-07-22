@@ -30,7 +30,7 @@ export default function Register() {
     const register = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:8000/register", {
+            await axios.post("https://backendsecondhand.herokuapp.com/register", {
                 nama: nama,
                 email: email,
                 password: password,

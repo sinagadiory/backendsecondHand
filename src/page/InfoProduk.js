@@ -54,15 +54,15 @@ export default function InfoProduk() {
 
     const fetchdata = async () => {
         try {
-            let response = await axios.get("http://localhost:8000/token", {
+            let response = await axios.get("https://backendsecondhand.herokuapp.com/token", {
                 withCredentials: true
             })
             SetToken(response.data.accessToken)
             const decoded = jwt_decode(response.data.accessToken)
-            response = await fetch(`http://localhost:8000/user/${decoded.id}`)
+            response = await fetch(`https://backendsecondhand.herokuapp.com/user/${decoded.id}`)
             const data = await response.json()
             SetUser(data)
-            response = await axios.get("http://localhost:8000/v1/Produk/add/form")
+            response = await axios.get("https://backendsecondhand.herokuapp.com/v1/Produk/add/form")
             setKategori(response.data)
             // console.log(response.data)
         } catch (error) {
@@ -108,7 +108,7 @@ export default function InfoProduk() {
             }
 
             if (file != null) {
-                let response = await axios.post("http://localhost:8000/v1/Produk/add/image/cloudinary",
+                let response = await axios.post("https://backendsecondhand.herokuapp.com/v1/Produk/add/image/cloudinary",
                     form,
                     {
                         headers: {
@@ -118,7 +118,7 @@ export default function InfoProduk() {
 
                 );
                 SetFoto(response.data.url)
-                response = await axios.post("http://localhost:8000/v1/Produk/add", {
+                response = await axios.post("https://backendsecondhand.herokuapp.com/v1/Produk/add", {
                     id_penjual: user.id,
                     id_kategori: id_kategori,
                     nama_produk: nama_produk,
@@ -127,13 +127,13 @@ export default function InfoProduk() {
                     deskripsi: deskripsi,
                     foto: response.data.url
                 })
-                await axios.post("http://localhost:8000/v1/Produk/email")
+                await axios.post("https://backendsecondhand.herokuapp.com/v1/Produk/email")
                 berhasil()
                 await sleep(2 * 1000)
                 navigasi("/home")
                 // navigasi("/home");npm ru
             } else {
-                await axios.post("http://localhost:8000/v1/Produk/add", {
+                await axios.post("https://backendsecondhand.herokuapp.com/v1/Produk/add", {
                     id_penjual: id_penjual,
                     id_kategori: id_kategori,
                     nama_produk: nama_produk,

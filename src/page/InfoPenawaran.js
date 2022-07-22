@@ -50,19 +50,19 @@ export default function InfoPenawaran() {
 
     const fetchdata = async () => {
         try {
-            let response = await axios.get("http://localhost:8000/token", {
+            let response = await axios.get("https://backendsecondhand.herokuapp.com/token", {
                 withCredentials: true
             })
             SetToken(response.data.accessToken)
             const decoded = jwt_decode(response.data.accessToken)
-            response = await fetch(`http://localhost:8000/user/${decoded.id}`)
+            response = await fetch(`https://backendsecondhand.herokuapp.com/user/${decoded.id}`)
             const data = await response.json()
             SetUser(data)
-            response = await axios.get("http://localhost:8000/v1/Produk/add/form")
+            response = await axios.get("https://backendsecondhand.herokuapp.com/v1/Produk/add/form")
             setKategori(response.data)
-            response = await axios.get(`http://localhost:8000/v1/penawaran/${decoded.id}`)
+            response = await axios.get(`https://backendsecondhand.herokuapp.com/v1/penawaran/${decoded.id}`)
             setProduk(response.data)
-            response = await axios.get(`http://localhost:8000/v1/penawaranBuyer/${decoded.id}`)
+            response = await axios.get(`https://backendsecondhand.herokuapp.com/v1/penawaranBuyer/${decoded.id}`)
             setCoba(response.data)
         } catch (error) {
             navigasi("/")
@@ -82,12 +82,12 @@ export default function InfoPenawaran() {
         console.log("tes", status)
         console.log("tes2", id_penawaran)
         try {
-            let response = await axios.put(`http://localhost:8000/v1/penawaran/update/${id_penawaran}`, {
+            let response = await axios.put(`https://backendsecondhand.herokuapp.com/v1/penawaran/update/${id_penawaran}`, {
                 id_status: status,
             })
             console.log('uji', response.data)
             if (status == 1) {
-                response = await axios.post(`http://localhost:8000/api/v1/penjualan`, {
+                response = await axios.post(`https://backendsecondhand.herokuapp.com/api/v1/penjualan`, {
                     id_pembeli: id_pembeli,
                     id_status: status,
                     id_produk: id_produkTerjual,
@@ -99,14 +99,14 @@ export default function InfoPenawaran() {
                 const sisaStok = stok - jumlahProduk
                 console.log('uji stok', sisaStok)
                 if (sisaStok == 0) {
-                    response = await axios.put(`http://localhost:8000/v1/Produk/update/${id_produkTerjual}`, {
+                    response = await axios.put(`https://backendsecondhand.herokuapp.com/v1/Produk/update/${id_produkTerjual}`, {
                         keterangan: "out",
                         stok: sisaStok,
                         produkTerjual: jumlahProduk,
                     })
                     console.log('uji 3', response.data)
                 } else {
-                    response = await axios.put(`http://localhost:8000/v1/Produk/update/${id_produkTerjual}`, {
+                    response = await axios.put(`https://backendsecondhand.herokuapp.com/v1/Produk/update/${id_produkTerjual}`, {
                         keterangan: "sold",
                         stok: sisaStok,
                         produkTerjual: jumlahProduk,
@@ -127,7 +127,7 @@ export default function InfoPenawaran() {
         console.log("tes", nomor)
         console.log("tes2", id_penawaran)
         try {
-            let response = await axios.put(`http://localhost:8000/v1/penawaran/update/${id_penawaran}`, {
+            let response = await axios.put(`https://backendsecondhand.herokuapp.com/v1/penawaran/update/${id_penawaran}`, {
                 id_status: "2",
             })
             console.log('uji', response.data)

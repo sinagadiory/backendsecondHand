@@ -34,24 +34,24 @@ export default function PreviewProduk() {
 
     const fetchdata = async () => {
         try {
-            let response = await axios.get("http://localhost:8000/token", {
+            let response = await axios.get("https://backendsecondhand.herokuapp.com/token", {
                 withCredentials: true
             })
             const decoded = jwt_decode(response.data.accessToken)
-            response = await fetch(`http://localhost:8000/user/${decoded.id}`)
+            response = await fetch(`https://backendsecondhand.herokuapp.com/user/${decoded.id}`)
             const iduser = decoded.id
             const data = await response.json()
             setUser(data)
-            // response = await axios.get(`http://localhost:8000/v1/Produk/preview/${id}`)
-            response = await axios.get(`http://localhost:8000/v1/Produk/preview/${id}`)
+            // response = await axios.get(`https://backendsecondhand.herokuapp.com/v1/Produk/preview/${id}`)
+            response = await axios.get(`https://backendsecondhand.herokuapp.com/v1/Produk/preview/${id}`)
             // console.log(response.data.Kategori.macam)
             setKategori(response.data.Kategori)
             setPenjual(response.data.User)
             // console.log(response.data);
             setProducts(response.data)
-            response = await axios.get(`http://localhost:8000/v1/penawaranBuyer/${decoded.id}`)
+            response = await axios.get(`https://backendsecondhand.herokuapp.com/v1/penawaranBuyer/${decoded.id}`)
             setCoba(response.data)
-            response = await axios.get(`http://localhost:8000/penawaranProduk/${id}`)
+            response = await axios.get(`https://backendsecondhand.herokuapp.com/penawaranProduk/${id}`)
             setCek(response.data)
             console.log("Cek", response.data);
             const orang = response.data
@@ -87,7 +87,7 @@ export default function PreviewProduk() {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    axios.delete(`http://localhost:8000/v1/produk/delete/${idproduk}`)
+                    axios.delete(`https://backendsecondhand.herokuapp.com/v1/produk/delete/${idproduk}`)
                     swal("Berhasil dihapus", {
                         icon: "success",
                     });
@@ -129,7 +129,7 @@ export default function PreviewProduk() {
                 gagal("Lengkapi Profil Terlebih Dahulu")
                 return
             }
-            await axios.post("http://localhost:8000/v1/penawaran/add", {
+            await axios.post("https://backendsecondhand.herokuapp.com/v1/penawaran/add", {
                 id_user: user.id,
                 id_produk: product.id,
                 id_penjual: penjual.id,
@@ -138,7 +138,7 @@ export default function PreviewProduk() {
                 penawaranHarga: penawaranharga,
                 ketNegosiasi: keterangan
             })
-            // response = await axios.post("http://localhost:8000/v1/Produk/email")
+            // response = await axios.post("https://backendsecondhand.herokuapp.com/v1/Produk/email")
             // navigasi("/home");
             berhasil()
             await sleep(1.5 * 1000)
